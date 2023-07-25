@@ -1,6 +1,5 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import '../styles/App.css';
-
 
 const App = () => {
   const [firstName, setFirstName] = useState('');
@@ -25,6 +24,11 @@ const App = () => {
     const commonLettersPattern = `[${[...commonLetters].join('')}]`;
     const firstNameAfterRemoval = firstName.replace(new RegExp(commonLettersPattern, 'g'), '');
     const secondNameAfterRemoval = secondName.replace(new RegExp(commonLettersPattern, 'g'), '');
+  
+    if (firstNameAfterRemoval.length < 3 || secondNameAfterRemoval.length < 3) {
+      setRelationshipStatus('Names must have at least three characters');
+      return;
+    }
   
     const sumOfLengths = (firstNameAfterRemoval.length + secondNameAfterRemoval.length) % 6;
     const statusMap = {
@@ -54,7 +58,6 @@ const App = () => {
           name="name1"
           type="text"
           id="input1"
-          data-testid="input1"
           value={firstName}
           onChange={handleFirstNameChange}
         />
@@ -65,22 +68,19 @@ const App = () => {
           name="name2"
           type="text"
           id="input2"
-          data-testid="input2"
           value={secondName}
           onChange={handleSecondNameChange}
         />
       </div>
-      <button data-testid="calculate_relationship" onClick={calculateRelationshipStatus}>
+      <button onClick={calculateRelationshipStatus}>
         Calculate Relationship Future
       </button>
-      <button data-testid="clear" onClick={handleClear}>
+      <button onClick={handleClear}>
         Clear
       </button>
-      <h3 data-testid="answer">{relationshipStatus}</h3>
+      <h3>{relationshipStatus}</h3>
     </div>
   );
 };
-
-
 
 export default App;
