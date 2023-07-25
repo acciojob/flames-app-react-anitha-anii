@@ -20,11 +20,12 @@ const App = () => {
       setRelationshipStatus('Please Enter valid input');
       return;
     }
-
+  
     const commonLetters = new Set([...firstName].filter(char => secondName.includes(char)));
-    const firstNameAfterRemoval = firstName.replace(new RegExp(`[${[...commonLetters].join('')}]`, 'g'), '');
-    const secondNameAfterRemoval = secondName.replace(new RegExp(`[${[...commonLetters].join('')}]`, 'g'), '');
-
+    const commonLettersPattern = `[${[...commonLetters].join('')}]`;
+    const firstNameAfterRemoval = firstName.replace(new RegExp(commonLettersPattern, 'g'), '');
+    const secondNameAfterRemoval = secondName.replace(new RegExp(commonLettersPattern, 'g'), '');
+  
     const sumOfLengths = (firstNameAfterRemoval.length + secondNameAfterRemoval.length) % 6;
     const statusMap = {
       1: 'Friends',
@@ -34,9 +35,10 @@ const App = () => {
       5: 'Enemy',
       0: 'Siblings',
     };
-
+  
     setRelationshipStatus(statusMap[sumOfLengths]);
   };
+  
 
   const handleClear = () => {
     setFirstName('');
