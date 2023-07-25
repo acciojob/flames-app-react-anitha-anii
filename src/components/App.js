@@ -49,6 +49,7 @@ const App = () => {
       <div>
         <label htmlFor="input1">First Name:</label>
         <input
+          name="name1"
           type="text"
           id="input1"
           data-testid="input1"
@@ -59,6 +60,7 @@ const App = () => {
       <div>
         <label htmlFor="input2">Second Name:</label>
         <input
+          name="name2"
           type="text"
           id="input2"
           data-testid="input2"
